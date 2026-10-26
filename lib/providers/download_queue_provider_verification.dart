@@ -79,7 +79,8 @@ extension _DownloadQueueVerificationGate on DownloadQueueNotifier {
     String extensionId,
     Future<void> cancellationSignal,
   ) async {
-    if (WidgetsBinding.instance.lifecycleState != AppLifecycleState.resumed) {
+    if (!isDesktopPlatform &&
+        WidgetsBinding.instance.lifecycleState != AppLifecycleState.resumed) {
       _log.i(
         'Verification required for $extensionId while app is in background; '
         'deferring challenge until the app is foregrounded',
